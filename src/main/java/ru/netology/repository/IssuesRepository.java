@@ -13,6 +13,10 @@ public class IssuesRepository {
         return items;
     }
 
+    public boolean addAll(Collection<? extends  Issues> items) {
+        return  this.items.addAll(items);
+    }
+
     public  Issues getById(int id) {
         for (Issues item : items) {
             if (item.getId() == id) {

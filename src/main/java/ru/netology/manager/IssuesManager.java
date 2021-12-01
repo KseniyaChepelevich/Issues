@@ -7,13 +7,18 @@ public class IssuesManager {
     public IssuesRepository repository = new IssuesRepository();
     public Issues[] items = new Issues[0];
 
+    public IssuesManager(IssuesRepository repository) {
+        this.repository = repository;
+    }
+
+
     public void save(Issues issues) {repository.add(issues); }
 
     public Issues[] findAll() {
         return (Issues[]) repository.getAll().toArray();
     }
 
-    public Issues[] searchClose(boolean close) {
+    public Issues[] searchClose() {
         Issues[] result = new Issues[0];
         for(Issues issues : repository.getAll()) {
             if(issues.isClose() == true) {
@@ -27,7 +32,7 @@ public class IssuesManager {
         return result;
     }
 
-    public Issues[] searchOpen(boolean open) {
+    public Issues[] searchOpen() {
         Issues[] result = new Issues[0];
         for(Issues issues : repository.getAll()) {
             if(issues.isClose() == false) {

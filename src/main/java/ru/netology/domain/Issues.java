@@ -5,16 +5,19 @@ import java.util.Set;
 
 public class Issues {
     private int id;
+    private String name;
     private boolean close;
     private String author;
     private Set labelIssue;
     private Set assignee;
-    private String projects;
-    private String milestones;
+    private Set projects;
+    private Set milestones;
     private Set tags;
 
-    public Issues(int id, boolean close, String author, Set labelIssue, Set assignee, String projects, String milestones, Set tags) {
+
+    public Issues(int id, String name, boolean close, String author, Set labelIssue, Set assignee, Set projects, Set milestones, Set tags) {
         this.id = id;
+        this.name = name;
         this.close = close;
         this.author = author;
         this.labelIssue = labelIssue;
@@ -24,13 +27,20 @@ public class Issues {
         this.tags = tags;
     }
 
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isClose() {
@@ -65,19 +75,19 @@ public class Issues {
         this.assignee = assignee;
     }
 
-    public String getProjects() {
+    public Set getProjects() {
         return projects;
     }
 
-    public void setProjects(String projects) {
+    public void setProjects(Set projects) {
         this.projects = projects;
     }
 
-    public String getMilestones() {
+    public Set getMilestones() {
         return milestones;
     }
 
-    public void setMilestones(String milestones) {
+    public void setMilestones(Set milestones) {
         this.milestones = milestones;
     }
 
