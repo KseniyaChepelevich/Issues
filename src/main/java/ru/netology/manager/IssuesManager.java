@@ -14,9 +14,9 @@ public class IssuesManager {
 
     public void save(Issues issues) {repository.add(issues); }
 
-    public Issues[] findAll() {
-        return (Issues[]) repository.getAll().toArray();
-    }
+    //public Issues[] findAll() {
+      //  return (Issues[]) repository.getAll().toArray();
+    //}
 
     public Issues[] searchClose() {
         Issues[] result = new Issues[0];
@@ -58,10 +58,10 @@ public class IssuesManager {
         return result;
     }
 
-    public Issues[] searchByAssignee(Object[] assignee) {
+    public Issues[] searchByAssignee(String assignee) {
         Issues[] result = new Issues[0];
         for(Issues issues : repository.getAll()) {
-            if(issues.getAssignee().toArray() == assignee) {
+            if(issues.getAssignee().contains(assignee)) {
                 Issues[]tmp = new Issues[result.length + 1];
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = issues;
@@ -78,9 +78,7 @@ public class IssuesManager {
             if (issues.getId() == id && !issues.isClose()) {
                 issues.setClose(true);
             }
-            if (issues.isClose() == true) {
-                return;
-            }
+
         }
     }
 
@@ -91,16 +89,14 @@ public class IssuesManager {
             if (issues.getId() == id && issues.isClose()) {
                 issues.setClose(false);
             }
-            if (!issues.isClose()) {
-                return;
-            }
+
         }
     }
 
-    public Issues[] searchByLabelIssue(Object[] labelIssue) {
+    public Issues[] searchByLabelIssue(String labelIssue) {
         Issues[] result = new Issues[0];
         for(Issues issues : repository.getAll()) {
-            if(issues.getLabelIssue().toArray() == labelIssue) {
+            if(issues.getLabelIssue().contains(labelIssue)) {
                 Issues[]tmp = new Issues[result.length + 1];
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = issues;
@@ -110,5 +106,18 @@ public class IssuesManager {
         return result;
     }
 
+    public void removeById(int id) {
+
+        Issues[] result = new Issues[0];
+        for (Issues issues : repository.getAll()) {
+            if (issues.getId() == id) {
+
+
+                repository.remove(issues);
+            }
+
+
+        }
+    }
 
 }
