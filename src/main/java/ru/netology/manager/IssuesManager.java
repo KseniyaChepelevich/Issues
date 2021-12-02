@@ -14,9 +14,7 @@ public class IssuesManager {
 
     public void save(Issues issues) {repository.add(issues); }
 
-    //public Issues[] findAll() {
-      //  return (Issues[]) repository.getAll().toArray();
-    //}
+
 
     public Issues[] searchClose() {
         Issues[] result = new Issues[0];
