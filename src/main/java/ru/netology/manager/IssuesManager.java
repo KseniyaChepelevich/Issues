@@ -33,7 +33,7 @@ public class IssuesManager {
     public Issue[] searchOpen() {
         Issue[] result = new Issue[0];
         for(Issue issues : repository.getAll()) {
-            if(issues.isClose() != true) {
+            if(!issues.isClose()) {
                 Issue[]tmp = new Issue[result.length + 1];
                 System.arraycopy(result, 0, tmp, 0, result.length);
                 tmp[tmp.length - 1] = issues;
