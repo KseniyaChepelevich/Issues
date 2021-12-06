@@ -1,26 +1,26 @@
 package ru.netology.repository;
 
-import ru.netology.domain.Issues;
+import ru.netology.domain.Issue;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class IssuesRepository {
-    private List<Issues> items = new ArrayList<>();
+    private List<Issue> items = new ArrayList<>();
 
-    public Collection<Issues> getAll() {
+    public Collection<Issue> getAll() {
         return this.items;
     }
 
-    public boolean addAll(Collection<? extends  Issues> items) {
+    public boolean addAll(Collection<? extends  Issue> items) {
         return  this.items.addAll(items);
     }
 
 
 
-    public  Issues getById(int id) {
-        for (Issues item : items) {
+    public  Issue getById(int id) {
+        for (Issue item : items) {
             if (item.getId() == id) {
                 return  item;
             }
@@ -30,14 +30,36 @@ public class IssuesRepository {
 
     }
 
-    public  boolean add(Issues item) {
+    public  boolean add(Issue item) {
         return  items.add(item);
     }
 
-    public boolean remove(Issues item) {return items.remove(item);}
+    public boolean remove(Issue item) {return items.remove(item);}
 
-    public boolean removeAll(Collection<? extends Issues> items) {
+    public boolean removeAll(Collection<? extends Issue> items) {
         return this.items.removeAll(items);
+    }
+
+    public void closeById(int id) {
+        Issue[] result = new Issue[0];
+        for(Issue issues : getAll()) {
+
+            if (issues.getId() == id && !issues.isClose()) {
+                issues.setClose(true);
+            }
+
+        }
+    }
+
+    public void openById(int id) {
+        Issue[] result = new Issue[0];
+        for(Issue issues : getAll()) {
+
+            if (issues.getId() == id && issues.isClose()) {
+                issues.setClose(false);
+            }
+
+        }
     }
 
 

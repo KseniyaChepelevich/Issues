@@ -1,7 +1,8 @@
 package ru.netology.manager;
 
 import org.junit.jupiter.api.Test;
-import ru.netology.domain.Issues;
+import ru.netology.domain.Issue;
+import ru.netology.domain.Issue;
 import ru.netology.repository.IssuesRepository;
 
 import java.util.*;
@@ -13,20 +14,20 @@ class IssuesManagerTest {
     private IssuesRepository repository = new IssuesRepository();
     private IssuesManager manager = new IssuesManager(repository);
 
-    private Issues first = new Issues(1, "First", true, "Ivanov", Set.of("bug"), Set.of("No one"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
-    private Issues second = new Issues(2, "Second", false, "Ivanov", Set.of("bug"), Set.of("Petrov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
-    private Issues third = new Issues(3, "Third", true, "Ivanov", Set.of("bug"), Set.of("Petrov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
-    private Issues fourth = new Issues(4, "Fourth", false, "Petrov", Set.of("documentation"), Set.of("Petrov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
-    private Issues fifth = new Issues(5, "Fifth", true, "Petrov", Set.of("bug"), Set.of("Sidorov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
-    private Issues sixth = new Issues(6, "Sixth", true, "Sidorov", Set.of("bug"), Set.of("Ivanov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
+    private Issue first = new Issue(1, "First", true, "Ivanov", Set.of("bug"), Set.of("No one"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
+    private Issue second = new Issue(2, "Second", false, "Ivanov", Set.of("bug"), Set.of("Petrov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
+    private Issue third = new Issue(3, "Third", true, "Ivanov", Set.of("bug"), Set.of("Petrov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
+    private Issue fourth = new Issue(4, "Fourth", false, "Petrov", Set.of("documentation"), Set.of("Petrov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
+    private Issue fifth = new Issue(5, "Fifth", true, "Petrov", Set.of("bug"), Set.of("Sidorov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
+    private Issue sixth = new Issue(6, "Sixth", true, "Sidorov", Set.of("bug"), Set.of("Ivanov"), Set.of("No one"), Set.of("No one"), Set.of("No one"));
 
 
     @Test
     void shouldSearchClose() {
         repository.addAll(List.of(first, second, third, fourth, fifth));
 
-        Issues[] expected = new Issues[]{first, third, fifth};
-        Issues[] actual = manager.searchClose();
+        Issue[] expected = new Issue[]{first, third, fifth};
+        Issue[] actual = manager.searchClose();
 
         assertArrayEquals(expected, actual);
     }
@@ -35,8 +36,8 @@ class IssuesManagerTest {
     void searchOpen() {
         repository.addAll(List.of(first, second, third, fourth, fifth));
 
-        Issues[] expected = new Issues[]{second, fourth};
-        Issues[] actual = manager.searchOpen();
+        Issue[] expected = new Issue[]{second, fourth};
+        Issue[] actual = manager.searchOpen();
 
         assertArrayEquals(expected, actual);
     }
@@ -47,8 +48,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first, second, third, fourth, fifth));
 
-        Issues[] expected = new Issues[]{first, second, third};
-        Issues[] actual = manager.searchByAuthor(author);
+        Issue[] expected = new Issue[]{first, second, third};
+        Issue[] actual = manager.searchByAuthor(author);
 
         assertArrayEquals(expected, actual);
 
@@ -61,8 +62,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first, second, third, fourth, fifth, sixth));
 
-        Issues[] expected = new Issues[]{sixth};
-        Issues[] actual = manager.searchByAuthor(author);
+        Issue[] expected = new Issue[]{sixth};
+        Issue[] actual = manager.searchByAuthor(author);
 
         assertArrayEquals(expected, actual);
 
@@ -74,8 +75,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first, second, third, fourth, fifth, sixth));
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchByAuthor(author);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchByAuthor(author);
 
         assertArrayEquals(expected, actual);
 
@@ -88,8 +89,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first, second, third, fourth, fifth));
 
-        Issues[] expected = new Issues[]{second, third, fourth};
-        Issues[] actual = manager.searchByAssignee(assignee);
+        Issue[] expected = new Issue[]{second, third, fourth};
+        Issue[] actual = manager.searchByAssignee(assignee);
 
         assertArrayEquals(expected, actual);
     }
@@ -100,8 +101,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first, second, third, fourth, fifth,sixth));
 
-        Issues[] expected = new Issues[]{sixth};
-        Issues[] actual = manager.searchByAssignee(assignee);
+        Issue[] expected = new Issue[]{sixth};
+        Issue[] actual = manager.searchByAssignee(assignee);
 
         assertArrayEquals(expected, actual);
     }
@@ -112,8 +113,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first, second, third, fourth, fifth,sixth));
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchByAssignee(assignee);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchByAssignee(assignee);
 
         assertArrayEquals(expected, actual);
     }
@@ -126,8 +127,8 @@ class IssuesManagerTest {
         repository.addAll(List.of(first, second, third, fourth, fifth));
         manager.closeById(idNecessaryToClose);
 
-        Issues[] expected = new Issues[]{first, second, third, fifth};
-        Issues[] actual = manager.searchClose();
+        Issue[] expected = new Issue[]{first, second, third, fifth};
+        Issue[] actual = manager.searchClose();
         assertArrayEquals(expected, actual);
     }
 
@@ -137,8 +138,8 @@ class IssuesManagerTest {
         repository.addAll(List.of(first, second, third, fourth, fifth, sixth));
         manager.closeById(idNecessaryToClose);
 
-        Issues[] expected = new Issues[]{first, third, fifth, sixth};
-        Issues[] actual = manager.searchClose();
+        Issue[] expected = new Issue[]{first, third, fifth, sixth};
+        Issue[] actual = manager.searchClose();
         assertArrayEquals(expected, actual);
     }
 
@@ -148,8 +149,8 @@ class IssuesManagerTest {
         repository.addAll(List.of(first, second, third, fourth, fifth));
         manager.openById(idNecessaryToOpen);
 
-        Issues[] expected = new Issues[]{second, third, fourth};
-        Issues[] actual = manager.searchOpen();
+        Issue[] expected = new Issue[]{second, third, fourth};
+        Issue[] actual = manager.searchOpen();
         assertArrayEquals(expected, actual);
     }
 
@@ -159,8 +160,8 @@ class IssuesManagerTest {
         repository.addAll(List.of(first, second, third, fourth, fifth, sixth));
         manager.openById(idNecessaryToOpen);
 
-        Issues[] expected = new Issues[]{second, fourth};
-        Issues[] actual = manager.searchOpen();
+        Issue[] expected = new Issue[]{second, fourth};
+        Issue[] actual = manager.searchOpen();
         assertArrayEquals(expected, actual);
     }
 
@@ -170,8 +171,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first, second, third, fourth, fifth));
 
-        Issues[] expected = new Issues[]{first, second, third, fifth};
-        Issues[] actual = manager.searchByLabelIssue(labelIssue);
+        Issue[] expected = new Issue[]{first, second, third, fifth};
+        Issue[] actual = manager.searchByLabelIssue(labelIssue);
 
         assertArrayEquals(expected, actual);
 
@@ -183,8 +184,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first, second, third, fourth, fifth, sixth));
 
-        Issues[] expected = new Issues[]{fourth};
-        Issues[] actual = manager.searchByLabelIssue(labelIssue);
+        Issue[] expected = new Issue[]{fourth};
+        Issue[] actual = manager.searchByLabelIssue(labelIssue);
 
         assertArrayEquals(expected, actual);
 
@@ -196,8 +197,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first, second, third, fourth, fifth, sixth));
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchByLabelIssue(labelIssue);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchByLabelIssue(labelIssue);
 
         assertArrayEquals(expected, actual);
 
@@ -210,8 +211,8 @@ class IssuesManagerTest {
         repository.addAll(List.of(first, second, third, fourth, fifth, sixth));
         repository.remove(third);
 
-        Issues[] expected = new Issues[]{first, second, fourth, fifth, sixth};
-        Issues[] actual = repository.getAll().toArray(new Issues[0]);
+        Issue[] expected = new Issue[]{first, second, fourth, fifth, sixth};
+        Issue[] actual = repository.getAll().toArray(new Issue[0]);
 
         assertArrayEquals(expected, actual);
 
@@ -224,8 +225,8 @@ class IssuesManagerTest {
         repository.addAll(List.of(first, second, fourth, fifth, sixth));
         repository.remove(third);
 
-        Issues[] expected = new Issues[]{first, second, fourth, fifth, sixth};
-        Issues[] actual = repository.getAll().toArray(new Issues[0]);
+        Issue[] expected = new Issue[]{first, second, fourth, fifth, sixth};
+        Issue[] actual = repository.getAll().toArray(new Issue[0]);
 
         assertArrayEquals(expected, actual);
 
@@ -236,8 +237,8 @@ class IssuesManagerTest {
     void shouldSearchCloseIfOneIn() {
         repository.addAll(List.of(first));
 
-        Issues[] expected = new Issues[]{first};
-        Issues[] actual = manager.searchClose();
+        Issue[] expected = new Issue[]{first};
+        Issue[] actual = manager.searchClose();
 
         assertArrayEquals(expected, actual);
     }
@@ -246,8 +247,8 @@ class IssuesManagerTest {
     void searchOpenIfOneIn() {
         repository.addAll(List.of(second));
 
-        Issues[] expected = new Issues[]{second};
-        Issues[] actual = manager.searchOpen();
+        Issue[] expected = new Issue[]{second};
+        Issue[] actual = manager.searchOpen();
 
         assertArrayEquals(expected, actual);
     }
@@ -258,8 +259,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(second));
 
-        Issues[] expected = new Issues[]{second};
-        Issues[] actual = manager.searchByAuthor(author);
+        Issue[] expected = new Issue[]{second};
+        Issue[] actual = manager.searchByAuthor(author);
 
         assertArrayEquals(expected, actual);
 
@@ -271,8 +272,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(second));
 
-        Issues[] expected = new Issues[]{second};
-        Issues[] actual = manager.searchByAssignee(assignee);
+        Issue[] expected = new Issue[]{second};
+        Issue[] actual = manager.searchByAssignee(assignee);
 
         assertArrayEquals(expected, actual);
     }
@@ -285,8 +286,8 @@ class IssuesManagerTest {
 
         manager.closeById(idNecessaryToClose);
 
-        Issues[] expected = new Issues[]{first};
-        Issues[] actual = manager.searchClose();
+        Issue[] expected = new Issue[]{first};
+        Issue[] actual = manager.searchClose();
         assertArrayEquals(expected, actual);
     }
 
@@ -298,8 +299,8 @@ class IssuesManagerTest {
 
         manager.openById(idNecessaryToOpen);
 
-        Issues[] expected = new Issues[]{second};
-        Issues[] actual = manager.searchOpen();
+        Issue[] expected = new Issue[]{second};
+        Issue[] actual = manager.searchOpen();
         assertArrayEquals(expected, actual);
     }
 
@@ -309,8 +310,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first));
 
-        Issues[] expected = new Issues[]{first};
-        Issues[] actual = manager.searchByLabelIssue(labelIssue);
+        Issue[] expected = new Issue[]{first};
+        Issue[] actual = manager.searchByLabelIssue(labelIssue);
 
         assertArrayEquals(expected, actual);
 
@@ -323,8 +324,8 @@ class IssuesManagerTest {
 
         repository.remove(first);
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = repository.getAll().toArray(new Issues[0]);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = repository.getAll().toArray(new Issue[0]);
 
         assertArrayEquals(expected, actual);
 
@@ -334,8 +335,8 @@ class IssuesManagerTest {
     void shouldSearchCloseWhichNotIfOneIn() {
         repository.addAll(List.of(second));
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchClose();
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchClose();
 
         assertArrayEquals(expected, actual);
     }
@@ -344,8 +345,8 @@ class IssuesManagerTest {
     void searchOpenWhichNotIfOneIn() {
         repository.addAll(List.of(first));
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchOpen();
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchOpen();
 
         assertArrayEquals(expected, actual);
     }
@@ -356,8 +357,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(second));
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchByAuthor(author);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchByAuthor(author);
 
         assertArrayEquals(expected, actual);
 
@@ -369,8 +370,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(first));
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchByAssignee(assignee);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchByAssignee(assignee);
 
         assertArrayEquals(expected, actual);
     }
@@ -383,8 +384,8 @@ class IssuesManagerTest {
 
         manager.closeById(idNecessaryToClose);
 
-        Issues[] expected = new Issues[]{first};
-        Issues[] actual = manager.searchClose();
+        Issue[] expected = new Issue[]{first};
+        Issue[] actual = manager.searchClose();
         assertArrayEquals(expected, actual);
     }
 
@@ -396,8 +397,8 @@ class IssuesManagerTest {
 
         manager.openById(idNecessaryToOpen);
 
-        Issues[] expected = new Issues[]{second};
-        Issues[] actual = manager.searchOpen();
+        Issue[] expected = new Issue[]{second};
+        Issue[] actual = manager.searchOpen();
         assertArrayEquals(expected, actual);
     }
 
@@ -407,8 +408,8 @@ class IssuesManagerTest {
 
         repository.addAll(List.of(fourth));
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchByLabelIssue(labelIssue);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchByLabelIssue(labelIssue);
 
         assertArrayEquals(expected, actual);
 
@@ -421,8 +422,8 @@ class IssuesManagerTest {
 
         repository.remove(second);
 
-        Issues[] expected = new Issues[]{first};
-        Issues[] actual = repository.getAll().toArray(new Issues[0]);
+        Issue[] expected = new Issue[]{first};
+        Issue[] actual = repository.getAll().toArray(new Issue[0]);
 
         assertArrayEquals(expected, actual);
 
@@ -433,8 +434,8 @@ class IssuesManagerTest {
     @Test
     void shouldSearchCloseInEmpty() {
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchClose();
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchClose();
 
         assertArrayEquals(expected, actual);
     }
@@ -442,8 +443,8 @@ class IssuesManagerTest {
     @Test
     void searchOpenInEmpty() {
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchOpen();
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchOpen();
 
         assertArrayEquals(expected, actual);
     }
@@ -453,8 +454,8 @@ class IssuesManagerTest {
         String author = "Ivanov";
 
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchByAuthor(author);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchByAuthor(author);
 
         assertArrayEquals(expected, actual);
 
@@ -465,8 +466,8 @@ class IssuesManagerTest {
         String assignee = "Petrov";
 
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchByAssignee(assignee);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchByAssignee(assignee);
 
         assertArrayEquals(expected, actual);
     }
@@ -477,8 +478,8 @@ class IssuesManagerTest {
 
         manager.closeById(idNecessaryToClose);
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchClose();
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchClose();
         assertArrayEquals(expected, actual);
     }
 
@@ -488,8 +489,8 @@ class IssuesManagerTest {
 
         manager.openById(idNecessaryToOpen);
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchOpen();
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchOpen();
         assertArrayEquals(expected, actual);
     }
 
@@ -498,8 +499,8 @@ class IssuesManagerTest {
         String labelIssue = "bug";
 
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = manager.searchByLabelIssue(labelIssue);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = manager.searchByLabelIssue(labelIssue);
 
         assertArrayEquals(expected, actual);
 
@@ -511,8 +512,8 @@ class IssuesManagerTest {
 
         repository.remove(third);
 
-        Issues[] expected = new Issues[]{};
-        Issues[] actual = repository.getAll().toArray(new Issues[0]);
+        Issue[] expected = new Issue[]{};
+        Issue[] actual = repository.getAll().toArray(new Issue[0]);
 
         assertArrayEquals(expected, actual);
 

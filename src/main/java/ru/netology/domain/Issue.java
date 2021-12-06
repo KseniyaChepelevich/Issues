@@ -1,21 +1,20 @@
 package ru.netology.domain;
 
-import java.util.Collections;
 import java.util.Set;
 
-public class Issues {
+public class Issue<labelIssue, assignee> {
     private int id;
     private String name;
     private boolean close;
     private String author;
-    private Set labelIssue;
-    private Set assignee;
-    private Set projects;
-    private Set milestones;
-    private Set tags;
+    private Set <String> labelIssue;
+    private Set <String> assignee;
+    private Set <String> projects;
+    private Set <String> milestones;
+    private Set <String> tags;
 
 
-    public Issues(int id, String name, boolean close, String author, Set labelIssue, Set assignee, Set projects, Set milestones, Set tags) {
+    public Issue(int id, String name, boolean close, String author, Set<String> labelIssue, Set<String> assignee, Set<String> projects, Set<String> milestones, Set<String> tags) {
         this.id = id;
         this.name = name;
         this.close = close;
@@ -26,6 +25,7 @@ public class Issues {
         this.milestones = milestones;
         this.tags = tags;
     }
+
 
     public int getId() {
         return id;
@@ -59,43 +59,43 @@ public class Issues {
         this.author = author;
     }
 
-    public Set getLabelIssue() {
+    public Set<String> getLabelIssue() {
         return labelIssue;
     }
 
-    public void setLabelIssue(Set labelIssue) {
+    public void setLabelIssue(Set<String> labelIssue) {
         this.labelIssue = labelIssue;
     }
 
-    public Set getAssignee() {
+    public Set<String> getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(Set assignee) {
+    public void setAssignee(Set<String> assignee) {
         this.assignee = assignee;
     }
 
-    public Set getProjects() {
+    public Set<String> getProjects() {
         return projects;
     }
 
-    public void setProjects(Set projects) {
+    public void setProjects(Set<String> projects) {
         this.projects = projects;
     }
 
-    public Set getMilestones() {
+    public Set<String> getMilestones() {
         return milestones;
     }
 
-    public void setMilestones(Set milestones) {
+    public void setMilestones(Set<String> milestones) {
         this.milestones = milestones;
     }
 
-    public Set getTags() {
+    public Set<String> getTags() {
         return tags;
     }
 
-    public void setTags(Set tags) {
+    public void setTags(Set<String> tags) {
         this.tags = tags;
     }
 }
